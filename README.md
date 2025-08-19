@@ -23,18 +23,23 @@ A generic Chrome Extension that works across merchant websites (on Product Descr
 - Click the extension icon and use the popup to generate and apply new copy.
 - Configure your API key and options via the options page.
 
-## Development
+## Configuration (IMPORTANT for Manifest V3)
+
+**Manifest V3 Chrome Extensions cannot load local files (like `env/local.js`) at runtime in the background service worker.**
+
+- All configuration (API key, mock mode, model) must be set via the Options page, which stores values in `chrome.storage`.
+- If you want to automate setting these values for local development, use the Options page or a script that writes to `chrome.storage`.
+
+## Development Notes
 - The extension uses Manifest V3 and ES modules.
 - Main files:
-   - `background.js`: Handles API calls, storage, and messaging.
+   - `background.js`: Handles API calls, storage, and messaging. **Configuration is only read from `chrome.storage`.**
    - `contentScript.js`: Scrapes and replaces PDP content.
    - `popup.js`/`popup.html`: User interface for triggering actions.
    - `options.js`/`options.html`: Options page for configuration.
-- Environment variables are loaded from `env/local.js` (not committed).
 
 ## Security
 - Your API key is stored locally and never sent to third parties except OpenAI.
 
 ## License
 MIT
-

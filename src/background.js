@@ -1,20 +1,3 @@
-// background.js (ES module)
-
-// ENV loader for Manifest V3 service worker (no top-level await allowed)
-let ENV = null;
-async function getEnv() {
-  if (ENV !== null) return ENV;
-  try {
-    const mod = await import('../env/local.js');
-    ENV = (mod?.default || mod || {});
-    console.log('[AI PDP Extension][background] getEnv loaded:', ENV);
-  } catch (e) {
-    // console.error('[AI PDP Extension][background] getEnv import failed:', e);
-    ENV = {};
-  }
-  return ENV;
-}
-
 async function getStored(key) {
   const obj = await chrome.storage.local.get(key);
   return obj?.[key];
@@ -26,9 +9,9 @@ async function getConfig() {
   const storedModel = await getStored("MODEL");
   const env = await getEnv();
   return {
-    apiKey: env.OPENAI_API_KEY ?? storedKey ?? "",
-    useMock: (typeof env.USE_MOCK === "boolean" ? env.USE_MOCK : undefined) ?? !!storedMock,
-    model: env.MODEL ?? storedModel ?? "gpt-4o-mini"
+    apiKey: storedKey ?? "",
+    useMock: !!storedMock,
+    model: storedModel ?? "gpt-4o-mini"
   };
 }
 
