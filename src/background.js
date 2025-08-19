@@ -5,7 +5,7 @@ let ENV = null;
 async function getEnv() {
   if (ENV !== null) return ENV;
   try {
-    const mod = await import('./env/local.js');
+    const mod = await import('../env/local.js');
     ENV = (mod?.default || mod || {});
     console.log('[AI PDP Extension][background] getEnv loaded:', ENV);
   } catch (e) {
