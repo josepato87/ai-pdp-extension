@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "AI PDP Copy Generator",
+  "version": "0.0.1",
+  "description": "Scrape PDP fields and replace them with LLM-generated copy.",
+  "permissions": ["storage", "activeTab", "scripting", "webNavigation"],
+  "host_permissions": ["https://*/*", "http://*/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": {
+    "default_title": "AI PDP",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["contentScript.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

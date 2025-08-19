@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>AI PDP Settings</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 520px; margin: 24px auto; padding: 0 16px; }
+        label { display: block; margin: 12px 0 6px; }
+        input[type="password"], input[type="text"] { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #ccc; }
+        button { margin-top: 16px; padding: 8px 12px; border: 0; border-radius: 8px; background: #111; color: #fff; cursor: pointer; }
+        .hint { color: #666; font-size: 12px; margin-top: 4px; }
+        .row { display: flex; gap: 12px; align-items: center; }
+    </style>
+</head>
+<body>
+<h2>AI PDP Settings</h2>
+
+<label>OpenAI API Key</label>
+<input id="apiKey" type="password" placeholder="sk-..." />
+<div class="hint">Stored locally (chrome.storage.local). Not synced. Local /env/local.js overrides this if present.</div>
+
+<label>Model</label>
+<input id="model" type="text" placeholder="gpt-4o-mini" />
+
+<div class="row">
+    <input id="useMock" type="checkbox" />
+    <label for="useMock" style="margin:0;">Use Mock Mode (no API calls)</label>
+</div>
+
+<button id="save">Save</button>
+<div id="status" class="hint" style="margin-top:8px;"></div>
+
+<script src="options.js"></script>
+</body>
+</html>
